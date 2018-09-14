@@ -1,6 +1,6 @@
-#Rhubarb-itrage
+# Rhubarb-itrage
 
-A 0x arbitrage bot with rich, tart flavor. Perfect for pies.
+A 0x arbitrage bot with rich, tart flavor. Perfect for baking crypto-pies.
 
 ![Rhubarb-itrage](./Rhubarb-itrage.png)
 
