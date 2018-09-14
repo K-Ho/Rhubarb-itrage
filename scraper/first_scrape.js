@@ -1,6 +1,6 @@
 var async = require('async-bluebird');
 var processLogFill = require('./util/processLogFill.js');
-
+var fs = require('fs');
 var {
   ExchangeContract,
   exchangeContractGenesisBlock,
@@ -28,6 +28,14 @@ provider.getLogs({
   toBlock: 'latest'
 }).then((logs) => {
   console.log('Got logs. Processing...');
+  // console.log('num of logs',logs.length);
+  // const outputPath = __dirname +
+  //              '/mainnet_logs.json';
+
+  // fs.writeFile(outputPath, JSON.stringify(logs), function (err) {
+  //         if (err) throw err;
+  //         console.log('finished creating new JSON file at ' + outputPath)
+  //     });
   return async.eachLimit(logs, 10, (log, callback) => {
     processLogFill(log).then((errors) => {
       console.log('Processed', success_count);

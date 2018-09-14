@@ -76,7 +76,6 @@ var LogFillFunctions = (function() {
 
     var numOrders = params.orderAddresses.length;
     var orders = new Array(numOrders);
-    console.log('here?processlogfill');
     for (var i = 0; i < numOrders; i++) {
       orders[i] = {
         ecSignature: {
@@ -115,8 +114,8 @@ function ErrorWithInfo(message, info) {
 function getSignedOrders(rawFillOrderTransaction) {
   var decodedTx = txDecoder.decodeTx(rawFillOrderTransaction);
   var decodedFn = fnDecoder.decodeFn(decodedTx.data);
-  console.log('decodedTX?: ', JSON.stringify(decodedTx));
-  console.log('decodedFN?: ', JSON.stringify(decodedFn));
+  // console.log('decodedTX?: ', JSON.stringify(decodedTx));
+  // console.log('decodedFN?: ', JSON.stringify(decodedFn));
   var sighash = decodedTx.data.substring(0,10);
   var processFn = LogFillFunctions[sighash];
 
@@ -130,21 +129,22 @@ function getSignedOrders(rawFillOrderTransaction) {
 
 module.exports = function(log) {
   var error_logs = {};
-
   return provider.getTransaction(log.transactionHash).then((transaction) => {
     var orders = getSignedOrders(transaction.raw);
     console.log('getSignedOrders: ', JSON.stringify(orders));
-    return async.eachLimit(orders, 10, (order, callback) => {
-      zeroEx.exchange.validateOrderFillableOrThrowAsync(order).then(() => {
-        return db.addOrder(order);
-      }).then(() => callback()).catch((err) => {
-        if (error_whitelist[err.message]) {
-          error_logs[err] = true;
-          callback();
-        } else {
-          callback(err);
-        }
-      });
-    });
-  }).then(() => {return Promise.resolve(error_logs)});
+    return orders;
+  //   return async.eachLimit(orders, 10, (order, callback) => {
+  //     zeroEx.exchange.validateOrderFillableOrThrowAsync(order).then(() => {
+  //       return db.addOrder(order);
+  //     }).then(() => callback()).catch((err) => {
+  //       if (error_whitelist[err.message]) {
+  //         error_logs[err] = true;
+  //         callback();
+  //       } else {
+  //         callback(err);
+  //       }
+  //     });
+  //   });
+  // }).then(() => {return Promise.resolve(error_logs)});
+  })
 }
