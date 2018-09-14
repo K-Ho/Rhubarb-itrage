@@ -1,15 +1,7 @@
-# 0xchange-server
+#Rhubarb-itrage
+A 0x arbitrage bot with rich, tart flavor. Perfect for pies.
 
-This is the server component of the 0xchange project for ETHWaterloo 2017!
-
-#### We won the 0x API Prize!
-
-- See the live site at https://0xchange.me/
-
-- by Billy Rennekamp, Gregory Hogue, Kevin Ho, & Alex Zhao
-
-- read more: https://devpost.com/software/0xchange-me
-
+![Rhubarb-itrage](./Rhubarb-itrage.png)
 
 ## API reference:
 
