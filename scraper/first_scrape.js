@@ -28,7 +28,7 @@ provider.getLogs({
   toBlock: 'latest'
 }).then((logs) => {
   console.log('Got logs. Processing...');
-  // console.log('num of logs',logs.length);
+  console.log('num of logs',logs.length);
   // const outputPath = __dirname +
   //              '/mainnet_logs.json';
 
